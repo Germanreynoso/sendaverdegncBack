@@ -15,6 +15,9 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const shiftRoutes = require('./routes/shiftRoutes');
 
+// Importar controlador de auth para ruta directa
+const { login } = require('./controllers/authController');
+
 const app = express();
 
 // Configuración de Swagger
@@ -210,6 +213,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/shifts', shiftRoutes);
+
+// Ruta directa para login (para compatibilidad con frontend)
+app.post('/login', login);
 
 // Ruta 404
 app.use((req, res) => {
