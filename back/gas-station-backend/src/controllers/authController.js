@@ -5,18 +5,18 @@ const { pool } = require('../config/database');
 // Login
 exports.login = async (req, res, next) => {
   try {
-    const { nombre, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!nombre || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Por favor proporciona usuario y contraseña'
+        message: 'Por favor proporciona email y contraseña'
       });
     }
 
     const result = await pool.query(
-      'SELECT * FROM usuarios WHERE nombre = $1 AND activo = true',
-      [nombre]
+      'SELECT * FROM usuarios WHERE email = $1 AND activo = true',
+      [email]
     );
 
     if (result.rows.length === 0) {
