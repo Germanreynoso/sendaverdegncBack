@@ -16,7 +16,7 @@ exports.login = async (req, res, next) => {
     }
 
     const result = await pool.query(
-      'SELECT * FROM usuarios WHERE nombre = $1 AND activo = true',
+      'SELECT * FROM usuarios WHERE LOWER(nombre) = LOWER($1) AND activo = true',
       [userIdentifier]
     );
 
